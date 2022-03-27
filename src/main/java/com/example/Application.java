@@ -1,8 +1,6 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,10 +13,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    DeveloperRepository developerRepository;
+    StudentRepository studentrepo;
 
     @Autowired
-    SkillRepository skillRepository;
+    CourseRepository courserepo;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -26,28 +24,40 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Skill javascript = new Skill("javascript", "Javascript language skill");
-		Skill ruby = new Skill("ruby", "Ruby language skill");
-		Skill emberjs = new Skill("emberjs", "Emberjs framework");
-		Skill angularjs = new Skill("angularjs", "Angularjs framework");
+		Course CompilerDesign = new Course("CD", "Compiler Design");
+		Course CloudComputing = new Course("CC", "Cloud Computing");
+		Course OOAD = new Course("OOAD", "Object Oriented Analysis and Design");
+		Course GP = new Course("GP", "Generic Programming");
+		Course WebTech = new Course("WT", "Web Tech");
+		Course DBT = new Course("DBT", "Database Technologies");
+		Course DAA = new Course("DAA", "Design and analysis of Algo");
+		Course OS = new Course("OS", "Operating systems");
+		Course MPCA = new Course("MPCA", "MicroProcessor");
+		Course CN = new Course("CN", "Computer Networks");
 
-		skillRepository.save(javascript);
-		skillRepository.save(ruby);
-		skillRepository.save(emberjs);
-		skillRepository.save(angularjs);
+		courserepo.save(CompilerDesign);
+		courserepo.save(CloudComputing);
+		courserepo.save(OOAD);
+		courserepo.save(GP);
+		courserepo.save(WebTech);
+		courserepo.save(DBT);
+		courserepo.save(DAA);
+		courserepo.save(OS);
+		courserepo.save(MPCA);
+		courserepo.save(CN);
 
-		List<Developer> developers = new LinkedList<Developer>();
-		developers.add(new Developer("John", "Smith", "john.smith@example.com", 
-				Arrays.asList(new Skill[] { javascript, ruby })));
-		developers.add(new Developer("Mark", "Johnson", "mjohnson@example.com", 
-				Arrays.asList(new Skill[] { emberjs, ruby })));
-		developers.add(new Developer("Michael", "Williams", "michael.williams@example.com", 
-				Arrays.asList(new Skill[] { angularjs, ruby })));
-		developers.add(new Developer("Fred", "Miller", "f.miller@example.com", 
-				Arrays.asList(new Skill[] { emberjs, angularjs, javascript })));
-		developers.add(new Developer("Bob", "Brown", "brown@example.com", 
-				Arrays.asList(new Skill[] { emberjs })));
-		developerRepository.save(developers);
+		List<Student> students = new LinkedList<Student>();
+		students.add(new Student("Jane", "Doe", "PES1UG19CS323", 
+				Arrays.asList(new Course[] { CompilerDesign, CloudComputing })));
+		students.add(new Student("Mark", "Sloan", "PES1UG19CS583", 
+				Arrays.asList(new Course[] { OOAD, GP })));
+		students.add(new Student("Michael", "Williams", "PES1UG19CS113", 
+				Arrays.asList(new Course[] { WebTech, DBT })));
+		students.add(new Student("Anna", "Miller", "PES1UG19CS150", 
+				Arrays.asList(new Course[] { DAA, OS, MPCA })));
+		students.add(new Student("Susan", "Brown", "PES1UG19CS656", 
+				Arrays.asList(new Course[] { CN })));
+		studentrepo.saveAll(students);
 	}
 
 }
