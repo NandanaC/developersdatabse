@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="/bootstrap.css" media="screen"/>
+</head>
+<body>
+	<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>Student</h1>
+            
+            <form class="form-horizontal" th:action="@{/student/{id}/courses(id=${student.id})}" method="post" enctype="multipart/form-data" >
+            	<fieldset>
+            		<div class="form-group">
+	                    <label class="col-lg-2 control-label">Name</label>
+	                    <div class="col-lg-6">
+	                    	<input type="text" class="form-control" disabled="disabled" 
+	                    		th:value="${student.firstName + ' ' + student.lastName}"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+	                    <label class="col-lg-2 control-label">SRN</label>
+	                    <div class="col-lg-6">
+	                    	<input type="text" class="form-control" disabled="disabled" 
+	                    		th:value="${student.srn}"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+	                    <label class="col-lg-2 control-label">Courses</label>
+	                    <div class="col-lg-10">
+							<div th:each="course : ${student.courses}">
+								<span th:text="${course.label}" /> - <span th:text="${course.description}" />
+							</div>
+	                    </div>
+	                </div>
+            		<div class="form-group">
+	                    <div class="col-lg-6 col-lg-offset-2">
+							<div class="input-group">
+								<select name="courseId" class="form-control">
+									<option th:each="course : ${courses}" 
+										th:value="${course.id}" 
+										th:text="${course.description}">Course</option>
+								</select>
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-default">Add Course</button>
+								</span>
+							</div>
+	                    </div>
+                	</div>
+            	</fieldset>
+            </form>
+          </div>
+        	<!--<div>
+        		<span class="Done-button" >
+					<a th.href="@{/students}">
+					<button class="btn btn-link">Done</button></a>
+				</span>
+        	</div> -->
+        </div>
+      </div>
+	</div>
+
+</body>
+</html>
